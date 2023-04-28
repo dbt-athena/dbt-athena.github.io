@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: deploy-docs-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install and Build
+        run: |
+          cd website
+          npm ci
+          npm run build
+
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./website/build/
+          branch: gh-pages
+          clean-exclude: pr-preview
+
+      # Popular action to deploy to GitHub Pages:
+      # https://docusaurus.io/docs/deployment#deploying-to-github-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Build output to publish to the `gh-pages` branch:
+          publish_dir: ./website/build/

@@ -101,7 +101,7 @@ var siteSettings = {
       },
       items: [
         {
-          to: "/docs/introduction",
+          to: "/",
           label: "Docs",
           position: "left",
           activeBaseRegex: "docs/(?!(dbt-cloud))",
