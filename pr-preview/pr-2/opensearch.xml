@@ -4,6 +4,7 @@
   <ShortName>dbt-athena docs</ShortName>
   <Description>Search dbt-athena docs</Description>
   <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://dbt-athena.github.io/pr-preview/pr-2/img/favicon.svg</Image>
   <Url type="text/html" method="get" template="https://dbt-athena.github.io/pr-preview/pr-2/search?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://dbt-athena.github.io/pr-preview/pr-2/opensearch.xml" />
   <moz:SearchForm>https://dbt-athena.github.io/pr-preview/pr-2/</moz:SearchForm>
