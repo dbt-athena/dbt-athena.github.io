@@ -25,8 +25,14 @@ jobs:
           cache: 'npm'
           cache-dependency-path: website/package-lock.json
 
-      - name: Install and Build
-        run: cd website/ && npm ci && npm run build
+      - name: Determine preview base url for Docusaurus
+        run: echo "PREVIEW_PATH=/pr-preview/pr-${{ github.event.number }}" >> "$GITHUB_ENV"
+
+      - name: Install dependencies
+        run: cd website/ && npm ci
+
+      - name: Build docs
+        run: npm run build
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1

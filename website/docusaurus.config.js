@@ -40,7 +40,7 @@ console.log("DEBUG: ALGOLIA_INDEX_NAME = ", ALGOLIA_INDEX_NAME);
 console.log("DEBUG: metatags = ", metatags);
 
 var siteSettings = {
-  baseUrl: "/",
+  baseUrl: process.env.PREVIEW_PATH ?? "/", // Preview PR urls need a different base URL
   tagline: "Documentation for dbt-athena",
   title: "dbt-athena docs",
   url: SITE_URL,

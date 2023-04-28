@@ -21,8 +21,11 @@ jobs:
           cache: 'npm'
           cache-dependency-path: website/package-lock.json
 
-      - name: Install and Build
-        run: cd website/ && npm ci && npm run build
+      - name: Install dependencies
+        run: cd website/ && npm ci
+
+      - name: Build docs
+        run: npm run build
 
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
