@@ -40,11 +40,15 @@ console.log("DEBUG: ALGOLIA_INDEX_NAME = ", ALGOLIA_INDEX_NAME);
 console.log("DEBUG: metatags = ", metatags);
 console.log("DEBUG: PREVIEW_PATH = ", process.env.PREVIEW_PATH);
 
+// Preview PR urls need a different base URL
+const baseUrl = process.env.PREVIEW_PATH ? process.env.PREVIEW_PATH : "/";
+
 var siteSettings = {
-  baseUrl: process.env.PREVIEW_PATH ? process.env.PREVIEW_PATH : "/", // Preview PR urls need a different base URL
+  baseUrl,
   tagline: "Documentation for dbt-athena",
   title: "dbt-athena docs",
   url: SITE_URL,
+  favicon: "img/favicon.svg",
 
   // GitHub pages deployment config.
   organizationName: "dbt-athena",
@@ -159,10 +163,10 @@ var siteSettings = {
   ],
   scripts: ["https://kit.fontawesome.com/7110474d41.js"],
   stylesheets: [
-    "/css/fonts.css",
-    "/css/entypo.css",
-    "/css/search.css",
-    "/css/api.css",
+    `${baseUrl}css/fonts.css`,
+    `${baseUrl}css/entypo.css`,
+    `${baseUrl}css/search.css`,
+    `${baseUrl}css/api.css`,
     "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;600;700&display=swap",
     "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap",
     {
@@ -171,8 +175,6 @@ var siteSettings = {
       integrity: "sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM",
       crossorigin: "anonymous",
     },
-    { rel: "icon", href: "/img/favicon.png", type: "image/png" },
-    { rel: "icon", href: "/img/favicon.svg", type: "image/svg+xml" },
   ],
 };
 
