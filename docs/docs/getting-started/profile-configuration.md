@@ -1,4 +1,4 @@
 ---
-title: "Configuration"
+title: "Profile configuration"
 id: profile-configuration
 ---
