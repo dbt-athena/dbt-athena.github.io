@@ -7,6 +7,8 @@ slug: /
 
 dbt-athena is a community-owned adapter for dbt Core. The dbt-athena package contains all the code to enable dbt to work with [AWS Athena](https://aws.amazon.com/athena/) and transform data using SQL.
 
+In essence, the dbt-athena adapter will transform existing data in Athena by leveraging the [`CREATE TABLE AS`](https://docs.aws.amazon.com/athena/latest/ug/create-table-as.html) or [`CREATE VIEW`](https://docs.aws.amazon.com/athena/latest/ug/create-view.html) SQL queries in AWS Athena.
+
 ## Features of dbt-athena
 
 - ✅ Supports dbt version `1.4.*`

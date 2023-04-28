@@ -17,7 +17,6 @@ const sidebarSettings = {
           ],
         },
         "docs/getting-started/installation",
-        "docs/getting-started/profile-configuration",
       ],
     },
 
@@ -26,13 +25,14 @@ const sidebarSettings = {
       type: "category",
       label: "Configuration",
       items: [
+        "docs/configuration/table-configuration",
         {
           type: "category",
           label: "Materializations",
           collapsed: true,
           items: [
             "docs/configuration/materializations/hive",
-            "docs/configuration/materializations/ha-hive",
+            "docs/configuration/materializations/hive-ha",
             "docs/configuration/materializations/iceberg",
           ],
         },

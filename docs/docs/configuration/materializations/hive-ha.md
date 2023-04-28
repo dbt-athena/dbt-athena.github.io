@@ -1,4 +1,4 @@
 ---
 title: "High-availability Hive table"
-id: ha-hive
+id: hive-ha
 ---
