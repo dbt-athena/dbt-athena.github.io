@@ -22,10 +22,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
 
       - name: Determine preview base url for Docusaurus
-        run: echo "PREVIEW_PATH=/pr-preview/pr-${{ github.event.number }}" >> "$GITHUB_ENV"
+        run: echo "PREVIEW_PATH=/pr-preview/pr-${{ github.event.number }}/" >> "$GITHUB_ENV"
 
       - name: Install dependencies & build
         run: npm ci && npm run build

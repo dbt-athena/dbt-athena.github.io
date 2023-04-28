@@ -38,9 +38,10 @@ console.log("DEBUG: DEPLOY_URL =", process.env.DEPLOY_URL);
 console.log("DEBUG: SITE_URL = ", SITE_URL);
 console.log("DEBUG: ALGOLIA_INDEX_NAME = ", ALGOLIA_INDEX_NAME);
 console.log("DEBUG: metatags = ", metatags);
+console.log("DEBUG: PREVIEW_PATH = ", process.env.PREVIEW_PATH);
 
 var siteSettings = {
-  baseUrl: process.env.PREVIEW_PATH ?? "/", // Preview PR urls need a different base URL
+  baseUrl: process.env.PREVIEW_PATH ? process.env.PREVIEW_PATH : "/", // Preview PR urls need a different base URL
   tagline: "Documentation for dbt-athena",
   title: "dbt-athena docs",
   url: SITE_URL,
