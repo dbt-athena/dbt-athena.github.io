@@ -19,17 +19,13 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path: website/package-lock.json
 
-      - name: Install dependencies
-        run: cd website/ && npm ci
-
-      - name: Build docs
-        run: npm run build
+      - name: Install dependencies & build
+        run: npm ci && npm run build
 
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./website/build/
+          folder: ./build/
           branch: gh-pages
           clean-exclude: pr-preview
 
@@ -41,4 +37,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
           # Build output to publish to the `gh-pages` branch:
-          publish_dir: ./website/build/
+          publish_dir: ./build/

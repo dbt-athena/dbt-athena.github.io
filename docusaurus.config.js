@@ -140,7 +140,7 @@ var siteSettings = {
           remarkPlugins: [math],
           rehypePlugins: [katex],
 
-          editUrl: "https://github.com/dbt-athena/dbt-athena.github.io/edit/" + GIT_BRANCH + "/website/",
+          editUrl: "https://github.com/dbt-athena/dbt-athena.github.io/edit/" + GIT_BRANCH,
           showLastUpdateTime: true,
           //showLastUpdateAuthor: false,
 
