@@ -19,16 +19,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Change directory
+        run: cd website
+
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'npm'
 
       - name: Install and Build
-        run: |
-          cd website
-          npm ci
-          npm run build
+        run: npm ci && npm run build
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
