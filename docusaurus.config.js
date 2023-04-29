@@ -1,7 +1,7 @@
 const path = require("path");
 const math = require("remark-math");
 const katex = require("rehype-katex");
-const { versions, versionedPages, versionedCategories } = require("./dbt-versions");
+const { versions, versionedPages, versionedCategories } = require("./dbt-athena-versions");
 require("dotenv").config();
 
 /* Debugging */

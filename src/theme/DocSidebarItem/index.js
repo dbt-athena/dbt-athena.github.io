@@ -5,7 +5,7 @@ import DocSidebarItemHtml from "@theme/DocSidebarItem/Html";
 
 /* dbt Customizations:
  * Import version context and utils
- * Get versionedPages from dbt-versions.js
+ * Get versionedPages from dbt-athena-versions.js
  * Get version from context
  * Hide sidebar item if not available for current version
  */
