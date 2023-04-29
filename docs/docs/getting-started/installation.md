@@ -7,7 +7,7 @@ sidebar_label: "Installation"
 ## Prerequisites
 
 - Installed dbt Core using the [installation instructions](https://docs.getdbt.com/docs/core/installation) for your operating system + a dbt project initialized.
-- A working Athena setup. See [Athena quickstart](docs/getting-started/athena-quickstart).
+- A working Athena setup.
 
 ## Install dbt-athena
 
