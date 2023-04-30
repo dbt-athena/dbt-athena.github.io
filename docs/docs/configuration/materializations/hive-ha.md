@@ -8,7 +8,7 @@ The current implementation of the Hive table materialization can lead to downtim
 **`table_hive_ha`** leverages the [table versions](https://docs.aws.amazon.com/glue/latest/webapi/API_GetTableVersions.html) feature of Glue catalog: creating a "tmp" table and swapping the target table to the location of the tmp table.
 
 :::info
-This materialization is only available for `table_type=hive` and requires using unique locations on S3.
+This materialization is only available for `table_type=hive` (default) and requires using unique locations on S3.
 :::
 
 ```sql

@@ -39,8 +39,8 @@ The options for `s3_data_naming` are:
 
 It's possible to set the `s3_data_naming` globally in the `profile.yml`, set it for a group of models in the `dbt_project.yml` or overwrite the value for a specific model in the config block.
 
-:::caution Work group with default output location
-When using an Athena workgroup with a default output location configured, `s3_data_naming` and any configured buckets are ignored and the location configured in the work group is used.
+:::caution Workgroup with default output location
+When using an Athena workgroup with a default output location configured, `s3_data_naming` and any configured buckets are ignored and the location configured in the workgroup is used.
 :::
 
 ## Incremental table models
