@@ -5,16 +5,16 @@ const { versions, versionedPages, versionedCategories } = require("./dbt-athena-
 require("dotenv").config();
 
 /* Debugging */
-var SITE_URL;
+let SITE_URL;
 if (!process.env.CONTEXT || process.env.CONTEXT == "production") {
   SITE_URL = "https://dbt-athena.github.io";
 } else {
   SITE_URL = process.env.DEPLOY_URL;
 }
 
-var GIT_BRANCH;
+let GIT_BRANCH;
 if (!process.env.CONTEXT || process.env.CONTEXT == "production") {
-  GIT_BRANCH = "current";
+  GIT_BRANCH = "main";
 } else {
   GIT_BRANCH = process.env.HEAD;
 }
@@ -22,8 +22,8 @@ if (!process.env.CONTEXT || process.env.CONTEXT == "production") {
 let { ALGOLIA_APP_ID, ALGOLIA_API_KEY, ALGOLIA_INDEX_NAME } = process.env;
 
 let metatags = [];
-// If Not Current Branch, do not index site
-if (GIT_BRANCH !== "current") {
+// If Not "main" Branch, do not index site
+if (GIT_BRANCH !== "main") {
   metatags.push({
     tagName: "meta",
     attributes: {
