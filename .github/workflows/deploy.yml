@@ -23,12 +23,6 @@ jobs:
       - name: Install dependencies & build
         run: npm ci && npm run build
 
-      - uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: ./build/
-          branch: gh-pages
-          clean-exclude: pr-preview
-
       # Popular action to deploy to GitHub Pages:
       # https://docusaurus.io/docs/deployment#deploying-to-github-pages
       - name: Deploy to GitHub Pages
@@ -36,6 +30,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
           # Build output to publish to the `gh-pages` branch:
           publish_dir: ./build/
+          # Exclude preview PRs dir
+          exclude_assets: "pr-preview"
