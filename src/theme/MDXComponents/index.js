@@ -1,0 +1,74 @@
+import React from "react";
+import MDXHead from "@theme/MDXComponents/Head";
+import MDXCode from "@theme/MDXComponents/Code";
+import MDXPre from "@theme/MDXComponents/Pre";
+import MDXDetails from "@theme/MDXComponents/Details";
+import MDXHeading from "@theme/MDXComponents/Heading";
+import MDXUl from "@theme/MDXComponents/Ul";
+import MDXImg from "@theme/MDXComponents/Img";
+import Admonition from "@theme/Admonition";
+import Mermaid from "@theme/Mermaid";
+
+/* dbt Customizations:
+ * Imports the following components below for export
+ */
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import Changelog from "@site/src/components/changelog";
+import WHCode from "@site/src/components/whcode";
+import Collapsible from "@site/src/components/collapsible";
+import FAQ from "@site/src/components/faqs";
+import FAQList from "@site/src/components/faqList";
+import File from "@site/src/components/file";
+import Lightbox from "@site/src/components/lightbox";
+import Link from "@site/src/components/link";
+import YoutubeVideo from "@site/src/components/youtube";
+import VersionBlock from "@site/src/components/versionBlock";
+import Var from "@site/src/components/variable";
+import Hero from "@site/src/components/hero";
+import Card from "@site/src/components/card";
+import Callout from "@site/src/components/callout";
+import BlogPostCard from "@site/src/components/blogPostCard";
+import PostCarousel from "@site/src/components/postCarousel";
+import CommunitySpotlightCard from "@site/src/components/communitySpotlightCard";
+import CommunitySpotlightList from "@site/src/components/communitySpotlightList";
+
+const MDXComponents = {
+  head: MDXHead,
+  code: MDXCode,
+  a: (props) => <Link {...props} />,
+  pre: MDXPre,
+  details: MDXDetails,
+  ul: MDXUl,
+  img: MDXImg,
+  h1: (props) => <MDXHeading as="h1" {...props} />,
+  h2: (props) => <MDXHeading as="h2" {...props} />,
+  h3: (props) => <MDXHeading as="h3" {...props} />,
+  h4: (props) => <MDXHeading as="h4" {...props} />,
+  h5: (props) => <MDXHeading as="h5" {...props} />,
+  h6: (props) => <MDXHeading as="h6" {...props} />,
+  admonition: Admonition,
+  mermaid: Mermaid,
+
+  BlogPostCard: BlogPostCard,
+  Callout: Callout,
+  Card: Card,
+  Changelog: Changelog,
+  Collapsible: Collapsible,
+  FAQ: FAQ,
+  FAQList: FAQList,
+  File: File,
+  Hero: Hero,
+  Lightbox: Lightbox,
+  Link: Link,
+  PostCarousel: PostCarousel,
+  Tabs: Tabs,
+  TabItem: TabItem,
+  WHCode: WHCode,
+  YoutubeVideo: YoutubeVideo,
+  VersionBlock: VersionBlock,
+  Var: Var,
+  CommunitySpotlightCard,
+  CommunitySpotlightList,
+};
+export default MDXComponents;
