@@ -22,6 +22,10 @@ jobs:
 
       - name: Install dependencies & build
         run: npm ci && npm run build
+        env:
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
 
       # Popular action to deploy to GitHub Pages:
       # https://docusaurus.io/docs/deployment#deploying-to-github-pages
