@@ -16,7 +16,7 @@ This materialization is only available for `table_type=hive` (default) and requi
   config(
     materialized='table_hive_ha',
     format='parquet',
-    partition_by=['status'],
+    partitioned_by=['status'],
     s3_data_naming='table_unique'
   )
 }}
@@ -42,6 +42,4 @@ By default, the materialization keeps the last 4 table versions. You can change 
 #### Known issues
 
 - When swapping from a table with partitions to a table without (and the other way around), there could be a little downtime. In case high performance is needed, consider bucketing instead of partitions
-- By default, Glue "duplicates" the versions internally, so the last 2 versions of a table point to the same location.
-- It's recommended to have `versions_to_keep` >= 4, as this will avoid to have the older location removed.
-- The macro `athena__end_of_time` needs to be overwritten by the user if using Athena v3 since it requires a precision parameter for timestamps
+- By default, Glue "duplicate" the versions internally, so the last 2 versions of a table point to the same location. Therefore it's recommended to use `versions_to_keep` >= 4, as this will avoid to have the older location removed.
