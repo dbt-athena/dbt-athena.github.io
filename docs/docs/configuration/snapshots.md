@@ -144,17 +144,17 @@ id,name,some_date
 
 </File>
 
-Now you can test these different snapshot strategies:
+Now you can test these different snapshot strategies. Replace `SNAPSHOT_NAME` with one of the snapshots defined above (e.g. `hive_snapshot_check_all_columns_strategy`).
 
 ```shell
 # Load seeds
 dbt seed
 
 # Run initial snapshot
-dbt snapshot --select hive_snapshot_check_all_columns_strategy
+dbt snapshot --select SNAPSHOT_NAME
 
 # Run snapshot again, on changed source data
-dbt snapshot --vars "seed_name: changed"
+dbt snapshot --select SNAPSHOT_NAME --vars "seed_name: changed"
 ```
 
 :::caution
@@ -173,7 +173,7 @@ Below is a summary of the steps to migrate all your snapshots:
 
 1. Install `dbt-athena>=1.5`
 2. Choose a snapshot to migrate. It's probably best to start with one of the least important ones first.
-3. Run `dbt snapshot <snapshot_name>`. This command should fail, and print a large error message with a migration query. Scroll up the stdout output until you find the same query again, but without the log timestamps.
+3. Run `dbt snapshot SNAPSHOT_NAME`. This command should fail, and print a large error message with a migration query. Scroll up the stdout output until you find the same query again, but without the log timestamps.
 4. Go to Athena and run the queries one by one. Please double-check each query to make sure that it does what it needs to do. The queries perform the following steps:
     * Take a backup of the original table. You never know.
     * Run the necessary transformations for the migration and store the results in a temporary table.
@@ -181,7 +181,7 @@ Below is a summary of the steps to migrate all your snapshots:
     * Copy the temporary table results to the original table.
     * Drop the temporary table.
 5. Check the results of the migrated table. Run some sanity checks to see if it behaves correctly. 
-6. (Optional) Run `dbt snapshot <snapshot_name>` again. This time there should be no error anymore.
+6. (Optional) Run `dbt snapshot SNAPSHOT_NAME` again. This time there should be no error anymore.
 7. Repeat steps 2-6 for all your snapshots.
 8. (Optional) Run `dbt snapshot` to make sure that all your snapshots are migrated.
 9. (Optional) After a couple of dbt runs, you can clean up the backup tables.
