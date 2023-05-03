@@ -49,7 +49,7 @@ const sidebarSettings = {
       type: "category",
       label: "Migration",
       items: [
-        "docs/UPGRADE-1.5",
+        "docs/migration/UPGRADE-1.5",
       ],
     },
 

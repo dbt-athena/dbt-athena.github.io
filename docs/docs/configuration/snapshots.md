@@ -7,7 +7,7 @@ id: snapshots
 
 :::caution
 Hive snapshots will undergo breaking changes in version 1.5. 
-See the [migration guide](docs/UPGRADE_1.5.md) for more details.
+See the [migration guide](docs/migration/UPGRADE-1.5.md) for more details.
 :::
 
 </VersionBlock>
@@ -16,7 +16,7 @@ See the [migration guide](docs/UPGRADE_1.5.md) for more details.
 
 :::caution
 Hive snapshots underwent breaking changes in version 1.5.
-See the [migration guide](docs/UPGRADE_1.5.md) for more details.
+See the [migration guide](docs/migration/UPGRADE-1.5.md) for more details.
 :::
 
 </VersionBlock>

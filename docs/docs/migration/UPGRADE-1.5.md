@@ -1,6 +1,6 @@
 ---
 title: "Upgrade to version 1.5"
-id: upgrade-1.5
+id: UPGRADE-1.5
 ---
 
 ## Hive snapshot migration
