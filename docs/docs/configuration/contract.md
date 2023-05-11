@@ -1,6 +1,6 @@
 ---
 title: "Contract & Constraints"
-id: contract-contraints
+id: contract-constraints
 ---
 
 ## Contract
@@ -11,6 +11,6 @@ entirely (for instance `array<int>`) even though they won't be checked. Indeed, 
 the broader type (array, map, int, varchar). The complete definition is used in order to check that the data types
 defined in athena are ok (pre-flight check).
 
-## Constraint
-The adapter does not support [constraint](https://docs.getdbt.com/reference/resource-properties/constraints) since 
+## Constraints
+The adapter does not support [constraints](https://docs.getdbt.com/reference/resource-properties/constraints) since 
 constraints don't exist in Athena.

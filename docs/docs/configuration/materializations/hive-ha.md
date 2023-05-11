@@ -3,7 +3,15 @@ title: "Highly-available Hive table"
 id: hive-ha
 ---
 
-<VersionBlock lastVersion="1.4">
+<VersionBlock firstVersion="1.5">
+
+:::caution
+This feature changed in version 1.5. 
+Visit the [hive materialization](./hive.md) page for more information, or browse the 
+[migration guide](../../migration/UPGRADE-1.5.md) for more details.
+:::
+
+</VersionBlock>
 
 The current implementation of the Hive table materialization can lead to downtime, because the target table is dropped and re-created. To have a less destructive behavior, it's possible to use the `table='table_hive_ha'` materialization.
 
@@ -45,12 +53,3 @@ By default, the materialization keeps the last 4 table versions. You can change 
 
 - When swapping from a table with partitions to a table without (and the other way around), there could be a little downtime. In case high performance is needed, consider bucketing instead of partitions
 - By default, Glue "duplicate" the versions internally, so the last 2 versions of a table point to the same location. Therefore it's recommended to use `versions_to_keep` >= 4, as this will avoid to have the older location removed.
-
-</VersionBlock>
-
-<VersionBlock firstVersion="1.5">
-
-This materialization has been removed and is now part of the `table` materialization, configurable with `ha=true`.
-You can find more about it in the table materialization page about [Hive tables](./hive.md).
-
-</VersionBlock>
