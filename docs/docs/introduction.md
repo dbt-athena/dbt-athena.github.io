@@ -11,7 +11,7 @@ In essence, the dbt-athena adapter will transform existing data in Athena by lev
 
 ## Features of dbt-athena
 
-- ✅ Supports dbt version `1.4.*`
+- ✅ Supports dbt version `1.5.*`
 - ✅ Supports [dbt seeds](https://docs.getdbt.com/docs/building-a-dbt-project/seeds)
 - ✅ Supports [dbt snapshots](https://docs.getdbt.com/docs/build/snapshots)
 - ✅ Supports [table materialization](https://docs.getdbt.com/docs/build/materializations#table) using Hive tables (Athena v2/v3) and [Iceberg tables](https://docs.aws.amazon.com/athena/latest/ug/querying-iceberg.html) (Athena v3)

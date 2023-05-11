@@ -31,11 +31,30 @@ The S3 location in which table data is saved, is determined by:
 
 The options for `s3_data_naming` are:
 
+<VersionBlock lastVersion="1.4">
+
 - **`uuid`**: `{s3_data_dir}/{uuid4()}/`
+
+</VersionBlock>
+
+<VersionBlock firstVersion="1.5">
+
+- **`unique`**: `{s3_data_dir}/{uuid4()}/`
+
+</VersionBlock>
+
 - **`table_table`**: `{s3_data_dir}/{table}/`
 - **`table_unique`**: `{s3_data_dir}/{table}/{uuid4()}/`
 - **`schema_table`**: `{s3_data_dir}/{schema}/{table}/`
 - **`schema_table_unique`**: `{s3_data_dir}/{schema}/{table}/{uuid4()}/`
+
+<VersionBlock firstVersion="1.5">
+
+:::caution Unique and UUID naming strategy
+In the past, the `unique` strategy was named `uuid`. We changed that to ensure consistency in our strategies naming.
+:::
+
+</VersionBlock>
 
 It's possible to set the `s3_data_naming` globally in the `profile.yml`, set it for a group of models in the `dbt_project.yml` or overwrite the value for a specific model in the config block.
 

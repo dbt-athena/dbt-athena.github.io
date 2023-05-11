@@ -3,6 +3,21 @@ title: "Upgrade to version 1.5"
 id: UPGRADE-1.5
 ---
 
+## Highly available Hive table
+
+The 1.5 version introduces a breaking change. Materaliazation `table_hive_ha` has been removed and integrated in the
+`table` materialization. To migrate your `table_hive_ha` models change the configuration with the following properties:
+
+* `materialization=table`
+* `ha=true`
+
+More information [here](../configuration/materializations/hive.md)
+
+## S3 naming strategies
+
+The 1.5 version introduces a breaking change. If you are using `uuid` strategy, it is now named `unique`, so change
+your config accordingly in your profiles file and your model & project YAML configs.
+
 ## Hive snapshot migration
 
 The hive snapshots in dbt-athena v1.4 diverged from the dbt-core implementation.
