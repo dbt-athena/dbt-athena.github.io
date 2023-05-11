@@ -44,6 +44,15 @@ const sidebarSettings = {
     // Others
     "docs/known-issues",
 
+    // Migration
+    {
+      type: "category",
+      label: "Migration",
+      items: [
+        "docs/migration/UPGRADE-1.5",
+      ],
+    },
+
     // Contributing
     {
       type: "category",
