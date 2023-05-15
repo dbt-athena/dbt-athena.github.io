@@ -1,5 +1,8 @@
 exports.versions = [
   {
+    version: "1.5",
+  },
+  {
     version: "1.4",
   },
   {
@@ -18,6 +21,11 @@ exports.versionedPages = [
   {
     page: "docs/configuration/materializations/hive-ha",
     firstVersion: "1.4.1",
+    lastVersion: "1.4",
+  },
+    {
+    page: "docs/configuration/contract",
+    firstVersion: "1.5.0",
   },
 ];
 

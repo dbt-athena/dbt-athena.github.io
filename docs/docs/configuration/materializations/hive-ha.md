@@ -3,6 +3,16 @@ title: "Highly-available Hive table"
 id: hive-ha
 ---
 
+<VersionBlock firstVersion="1.5">
+
+:::caution
+This feature changed in version 1.5. 
+Visit the [hive materialization](./hive.md) page for more information, or browse the 
+[migration guide](../../migration/UPGRADE-1.5.md) for more details.
+:::
+
+</VersionBlock>
+
 The current implementation of the Hive table materialization can lead to downtime, because the target table is dropped and re-created. To have a less destructive behavior, it's possible to use the `table='table_hive_ha'` materialization.
 
 **`table_hive_ha`** leverages the [table versions](https://docs.aws.amazon.com/glue/latest/webapi/API_GetTableVersions.html) feature of Glue catalog: creating a "tmp" table and swapping the target table to the location of the tmp table.
