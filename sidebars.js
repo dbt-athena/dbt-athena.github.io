@@ -38,6 +38,8 @@ const sidebarSettings = {
         },
         "docs/configuration/seeds",
         "docs/configuration/snapshots",
+        "docs/configuration/contract-constraints",
+        "docs/configuration/lakeformation",
       ],
     },
 
