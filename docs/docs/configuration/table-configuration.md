@@ -6,8 +6,8 @@ id: table-configuration
 ## Model configuration
 
 | Property            | Description                                                                                                                                                                                                                                                     | Default               |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `materialized`      | A table materialization like `table`, `incremental`, [`table_hive_ha`](docs/configuration/materializations/hive-ha)                                                                                                                                             |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
+| `materialized`      | A table materialization like `table`, `incremental`, [`table_hive_ha`](./materializations/hive-ha)                                                                                                                                                              |                       |
 | `s3_data_naming`    | An optional naming policy for the data on S3. See [Table data location](#table-data-location).                                                                                                                                                                  | `schema_table_unique` |
 | `external_location` | If set, the full S3 path in which the table will be saved. (Does not work with Iceberg table).                                                                                                                                                                  | `none`                |
 | `partitioned_by`    | An array list of columns by which the table will be partitioned. ⚠️ [Limited to the creation of 100 partitions](https://docs.aws.amazon.com/athena/latest/ug/ctas-considerations-limitations.html#ctas-considerations-limitations-partition-and-bucket-limits). | `none`                |
@@ -18,12 +18,12 @@ id: table-configuration
 | `write_compression` | The compression type to use for any storage format that allows compression to be specified. To see which options are available, see [CREATE TABLE AS](https://docs.aws.amazon.com/athena/latest/ug/create-table-as.html). Example: `SNAPPY`.                    | `none`                |
 | `field_delimiter`   | Custom field delimiter. Used when the format is set to `TEXTFILE`. See [CREATE TABLE AS](https://docs.aws.amazon.com/athena/latest/ug/create-table-as.html). Example: `','`                                                                                     | `none`                |
 | `table_properties`  | Additional table properties to add to the table. Valid for Iceberg only. Example: `{'optimize_rewrite_delete_file_threshold': '2'}`                                                                                                                             | `none`                |
-| `lf_tags`           | Lake Formation tags for metadata access control, to associate to the table. Example: `{"tag1":{"tag1": "value1", "tag2": "value2"}`                                                                                                                             | `none`                |
-| `lf_tags_columns`   | Lake Formation tags for metadata access control, to associate to columns. Example: `{"tag1": {"value1": ["column1": "column2"]}}`                                                                                                                               | `none`                |
+| `lf_tags_config`    | Lake Formation tags for metadata access control, to associate to the table. See detailed instructions [here](./lakeformation)                                                                                                                                   | `none`                |
+| `lf_grants`         | Lake Formation tags for metadata access control, to associate to columns. See detailed instructions [here](./lakeformation)                                                                                                                                     | `none`                |
 
 ## Table data location
 
-The S3 location in which table data is saved, is determined by:
+The S3 location in which table data is saved is determined by:
 
 1. If `external_location` is defined, that value is used.
 2. If `s3_data_dir` is defined, the path is determined by this value and `s3_data_naming`.
