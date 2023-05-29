@@ -26,7 +26,7 @@ id: table-configuration
 | Property         | Description                                                                                                                   | Default |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------|---------|
 | `lf_tags_config` | Lake Formation tags for metadata access control, to associate to the table. See detailed instructions [here](./lakeformation) | `none`  |
-| `lf_grants`      | Lake Formation tags for metadata access control, to associate to columns. See detailed instructions [here](./lakeformation)   | `none`  |
+| `lf_grants`      | Lake Formation data cell filters configuration. See detailed instructions [here](./lakeformation)                             | `none`  |
 
 </VersionBlock>
 
