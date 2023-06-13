@@ -46,36 +46,45 @@ Iceberg supports several **table formats** for data : `PARQUET`, `AVRO` and `ORC
 
 It is possible to use iceberg in an incremental materialization. Two strategies are supported:
 
-- `append`: new records are appended to the table, this can lead to duplicates
-- `merge`: must be used in combination with `unique_key`.
-  It performs an upsert: new records are added, and records that already existed, are updated. If
-  `delete_condition` is provided in the model config, it can also delete records based on the
-  provided condition (SQL condition). You can use any column of the incremental table (`src`) or
-  the final table (`target`). You must prefix the column by the name of the table to prevent
-  `Column is ambiguous` error.
+- `append`: New records are appended to the table, this can lead to duplicates.
+- `merge`: Performs an upsert (and optional delete), where new records are added and existing records are updated. Only available with Athena engine version 3.
+    - `unique_key` **(required)**: columns that define a unique record in the source and target tables.
+    <VersionBlock firstVersion="1.5.1">
+
+    - `incremental_predicates` (optional): SQL conditions that enable custom join clauses in the merge statement. This can be useful for improving performance via predicate pushdown on the target table.
+
+    - `delete_condition` (optional): SQL condition used to identify records that should be deleted.
+      - `delete_condition` and `incremental_predicates` can include any column of the incremental table (`src`) or the final table (`target`). Column names must be prefixed by either `src` or `target` to prevent a `Column is ambiguous` error.
+
+    </VersionBlock>
+
+    <VersionBlock firstVersion="1.4.4">
+
+    - `delete_condition` (optional): SQL condition used to identify records that should be deleted. Can include any column of the incremental table (`src`) or the final table (`target`). Column names must be prefixed by either `src` or `target` to prevent a `Column is ambiguous` error.
+
+    </VersionBlock>
 
 :::caution
-`MERGE INTO` is transactional and is supported only for Apache Iceberg tables in **Athena engine version 3**.
+`MERGE INTO` is transactional and is supported only for Apache Iceberg tables in **Athena engine version 3**
 :::
 
 ```sql
-{{
-  config(
+{{ config(
     materialized='incremental',
     table_type='iceberg',
     incremental_strategy='merge',
     unique_key='user_id',
-    delete_condition="src.status != 'active' and target.my_date < now() - interval '2' year"
-    format='parquet',
-  )
-}}
+    incremental_predicates=["src.quantity > 1", "target.my_date >= now() - interval '4' year"],
+    delete_condition="src.status != 'active' and target.my_date < now() - interval '2' year",
+    format='parquet'
+) }}
 
-SELECT
-    'A' AS user_id,
-    'pi' AS name,
-    'active' AS status,
-    17.89 AS cost,
-    1 AS quantity,
-    100000000 AS quantity_big,
-    current_date AS my_date
+select
+   'A' as user_id,
+   'pi' as name,
+   'active' as status,
+   17.89 as cost,
+   1 as quantity,
+   100000000 as quantity_big,
+   current_date as my_date
 ```
