@@ -1,5 +1,8 @@
 exports.versions = [
   {
+    version: "1.6",
+  },
+  {
     version: "1.5",
   },
   {
@@ -23,7 +26,7 @@ exports.versionedPages = [
     firstVersion: "1.4.1",
     lastVersion: "1.4",
   },
-    {
+  {
     page: "docs/configuration/contract",
     firstVersion: "1.5.0",
   },

@@ -5,9 +5,15 @@ id: iceberg
 
 # Apache Iceberg
 
-Athena supports read, time travel, write, and DDL queries for Apache Iceberg tables that use the Apache Parquet format for data and the AWS Glue catalog for their metastore.
+Athena supports read, time travel, write, and DDL queries for Apache Iceberg tables that use the Apache Parquet format
+for data and the AWS Glue catalog for their metastore.
 
-Apache Iceberg is an open table format for very large analytic datasets. Iceberg manages large collections of files as tables, and it supports modern analytical data lake operations such as record-level insert, update, delete, and time travel queries. The Iceberg specification allows seamless table evolution such as schema and partition evolution and is designed for optimized usage on Amazon S3. Iceberg also helps guarantee data correctness under concurrent write scenarios.
+Apache Iceberg is an open table format for huge analytic datasets.
+Iceberg manages large collections of files as tables, and it supports modern analytical data lake operations such as
+record-level insert, update, delete, and time travel queries.
+The Iceberg specification allows seamless table evolution such as schema and partition evolution and is designed for
+optimized usage on Amazon S3.
+Iceberg also helps guarantee data correctness under concurrent write scenarios.
 
 The dbt-athena adapter supports table materialization for Apache Iceberg.
 
@@ -28,17 +34,17 @@ To get started, add the following config block to your model:
   )
 }}
 
-SELECT
-    'A' AS user_id,
-    'pi' AS name,
-    'active' AS status,
-    17.89 AS cost,
-    1 AS quantity,
-    100000000 AS quantity_big,
-    current_date AS my_date
+SELECT 'A'          AS user_id,
+       'pi'         AS name,
+       'active'     AS status,
+       17.89        AS cost,
+       1            AS quantity,
+       100000000    AS quantity_big,
+       current_date AS my_date
 ```
 
-Iceberg supports **bucketing** as hidden partitions, therefore use the `partitioned_by` config to add specific bucketing conditions.
+Iceberg supports **bucketing** as hidden partitions, therefore, use the `partitioned_by` config to add specific
+bucketing conditions.
 
 Iceberg supports several **table formats** for data : `PARQUET`, `AVRO` and `ORC`.
 
@@ -47,26 +53,44 @@ Iceberg supports several **table formats** for data : `PARQUET`, `AVRO` and `ORC
 It is possible to use iceberg in an incremental materialization. Two strategies are supported:
 
 - `append`: New records are appended to the table, this can lead to duplicates.
-- `merge`: Performs an upsert (and optional delete), where new records are added and existing records are updated. Only available with Athena engine version 3.
-    - `unique_key` **(required)**: columns that define a unique record in the source and target tables.
-    <VersionBlock firstVersion="1.5.1">
+- `merge`: Performs an upsert (and optionally delete), where new records are added and existing records are updated.
+  Only available with Athena engine version 3.
 
-    - `incremental_predicates` (optional): SQL conditions that enable custom join clauses in the merge statement. This can be useful for improving performance via predicate pushdown on the target table.
+`merge` configuration
 
-    - `delete_condition` (optional): SQL condition used to identify records that should be deleted.
-      - `delete_condition` and `incremental_predicates` can include any column of the incremental table (`src`) or the final table (`target`). Column names must be prefixed by either `src` or `target` to prevent a `Column is ambiguous` error.
+- `unique_key` **(required)**: columns that define a unique record in the source and target tables.
 
-    </VersionBlock>
+<VersionBlock firstVersion="1.5.1">
 
-    <VersionBlock firstVersion="1.4.4">
+- `incremental_predicates` (optional): SQL conditions that enable custom join clauses in the merge statement. This can
+  be useful for improving performance via predicate pushdown on the target table.
 
-    - `delete_condition` (optional): SQL condition used to identify records that should be deleted. Can include any column of the incremental table (`src`) or the final table (`target`). Column names must be prefixed by either `src` or `target` to prevent a `Column is ambiguous` error.
+- `delete_condition` (optional): SQL condition used to identify records that should be deleted.
 
-    </VersionBlock>
+<VersionBlock firstVersion="1.6.2">
+
+- `update_condition` (optional): SQL condition used to identify records that should be updated.
+
+</VersionBlock>
+
+These configurations can include any column of the incremental table (`src`) or the final table (`target`).
+Column names must be prefixed by either `src` or `target` to prevent a `Column is ambiguous` error.
+
+</VersionBlock>
+
+<VersionBlock firstVersion="1.4.4">
+
+- `delete_condition` (optional): SQL condition used to identify records that should be deleted. Can include any column
+  of the incremental table (`src`) or the final table (`target`). Column names must be prefixed by either `src`
+  or `target` to prevent a `Column is ambiguous` error.
+
+</VersionBlock>
 
 :::caution
 `MERGE INTO` is transactional and is supported only for Apache Iceberg tables in **Athena engine version 3**
 :::
+
+`incremental_predicates & delete_condition` example:
 
 ```sql
 {{ config(
@@ -79,12 +103,48 @@ It is possible to use iceberg in an incremental materialization. Two strategies 
     format='parquet'
 ) }}
 
-select
-   'A' as user_id,
-   'pi' as name,
-   'active' as status,
-   17.89 as cost,
-   1 as quantity,
-   100000000 as quantity_big,
-   current_date as my_date
+select 'A'          as user_id,
+       'pi'         as name,
+       'active'     as status,
+       17.89        as cost,
+       1            as quantity,
+       100000000    as quantity_big,
+       current_date as my_date
 ```
+
+<VersionBlock firstVersion="1.6.2">
+
+`update_condition` example:
+
+```sql
+{{ config(
+        materialized='incremental',
+        incremental_strategy='merge',
+        unique_key=['id'],
+        update_condition='target.id > 1',
+        schema='sandbox'
+    )
+}}
+
+{% if is_incremental() %}
+
+select * from (
+    values
+    (1, 'v1-updated')
+    , (2, 'v2-updated')
+) as t (id, value)
+
+{% else %}
+
+select * from (
+    values
+    (-1, 'v-1')
+    , (0, 'v0')
+    , (1, 'v1')
+    , (2, 'v2')
+) as t (id, value)
+
+{% endif %}
+```
+
+</VersionBlock>
