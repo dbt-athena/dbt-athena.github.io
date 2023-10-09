@@ -31,6 +31,7 @@ dbt-athena uses the AWS Glue API to fetch metadata. You will need to set these p
 You will need these permissions on the glue databases you are writing to:
 
 ```json
+"glue:CreateDatabase",  -- Indeed, in case the Athena database does not exist, DBT will try to create it for you.
 "glue:GetDatabase",
 "glue:GetDatabases",
 "glue:GetTable",
