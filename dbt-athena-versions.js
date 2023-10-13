@@ -29,12 +29,12 @@ exports.versionedPages = [
   {
     page: "docs/configuration/contract-constraints",
     firstVersion: "1.5.1",
-    lastVersion: "1.5",
+    lastVersion: "1.6",
   },
   {
     page: "docs/configuration/lakeformation",
     firstVersion: "1.5.1",
-    lastVersion: "1.5",
+    lastVersion: "1.6",
   },
 ];
 
