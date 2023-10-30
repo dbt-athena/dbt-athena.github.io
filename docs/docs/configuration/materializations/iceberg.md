@@ -73,6 +73,12 @@ It is possible to use iceberg in an incremental materialization. Two strategies 
 
 </VersionBlock>
 
+<VersionBlock firstVersion="1.6.4">
+
+- `insert_condition` (optional): SQL condition used to identify records that should be inserted.
+
+</VersionBlock>
+
 These configurations can include any column of the incremental table (`src`) or the final table (`target`).
 Column names must be prefixed by either `src` or `target` to prevent a `Column is ambiguous` error.
 
@@ -143,6 +149,41 @@ select * from (
     , (1, 'v1')
     , (2, 'v2')
 ) as t (id, value)
+
+{% endif %}
+```
+
+</VersionBlock>
+
+<VersionBlock firstVersion="1.6.4">
+
+`insert_condition` example:
+
+```sql
+{{ config(
+        table_type='iceberg',
+        materialized='incremental',
+        incremental_strategy='merge',
+        unique_key=['id'],
+        insert_condition='src.status != 0'
+    )
+}}
+
+{% if is_incremental() %}
+
+select * from (
+    values
+    (1, -1)
+    , (2, 0)
+    , (3, 1)
+) as t (id, status)
+
+{% else %}
+
+select * from (
+    values
+    (0, 1)
+) as t (id, status)
 
 {% endif %}
 ```
