@@ -24,6 +24,7 @@ dbt-athena uses the AWS Glue API to fetch metadata. You will need to set these p
 "glue:GetDatabases",
 "glue:GetTable",
 "glue:GetTables",
+"glue:GetTableVersions",
 "glue:GetPartition",
 "glue:GetPartitions",
 ```
