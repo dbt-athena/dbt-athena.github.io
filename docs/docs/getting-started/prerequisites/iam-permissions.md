@@ -13,6 +13,7 @@ Athena permissions that are required to run queries:
 "athena:GetWorkGroup",
 "athena:StopQueryExecution",
 "athena:GetQueryExecution",
+"athena:GetDataCatalog",
 ```
 
 ## Glue IAM permissions
